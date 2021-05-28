@@ -17,18 +17,11 @@ body {
     justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
-}
-
-.logo-font {
-    text-transform: uppercase;
-}
-
-.main-logo-link {
-    width: fit-content;
+    color: grey;
 }
 
 .shop-now-button {
-    background: black;
+    background: #D11114;
     color: white;
     min-width: 260px;
 }
