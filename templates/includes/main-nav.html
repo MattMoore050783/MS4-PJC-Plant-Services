@@ -17,12 +17,12 @@
                 Building Supplies
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="building-link">
-                <a href="" class="dropdown-item">Abrasives &amp; Adhesives</a>
-                <a href="" class="dropdown-item">Dry Lining &amp; Insulation</a>
-                <a href="" class="dropdown-item">Fastenings &amp; Fixings</a>
-                <a href="" class="dropdown-item">Fencing</a>
-                <a href="" class="dropdown-item">Landscaping</a>
-                <a href="" class="dropdown-item">Timber</a>
+                <a href="{% url 'products' %}?category=adhesives" class="dropdown-item">Abrasives &amp; Adhesives</a>
+                <a href="{% url 'products' %}?category=insulation" class="dropdown-item">Dry Lining &amp; Insulation</a>
+                <a href="{% url 'products' %}?category=fixings" class="dropdown-item">Fastenings &amp; Fixings</a>
+                <a href="{% url 'products' %}?category=fencing" class="dropdown-item">Fencing</a>
+                <a href="{% url 'products' %}?category=landscaping" class="dropdown-item">Landscaping</a>
+                <a href="{% url 'products' %}?category=timber" class="dropdown-item">Timber</a>
             </div>
         </li>
 
@@ -31,9 +31,9 @@
                 Tools and Accessories
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="tools-link">
-                <a href="" class="dropdown-item">Blades &amp; Discs &amp; Drill Bits</a>
-                <a href="" class="dropdown-item">Hand Tools &amp; Power Tools</a>
-                <a href="" class="dropdown-item">All Tools</a>
+                <a href="{% url 'products' %}?category=blades" class="dropdown-item">Blades &amp; Discs &amp; Drill Bits</a>
+                <a href="{% url 'products' %}?category=tools" class="dropdown-item">Hand Tools &amp; Power Tools</a>
+                <a href="{% url 'products' %}?category=blades,tools" class="dropdown-item">All Tools</a>
             </div>
         </li>
 
@@ -42,10 +42,10 @@
                 PPE, Safety and Workwear
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="ppe-link">
-                <a href="" class="dropdown-item">PPE</a>
-                <a href="" class="dropdown-item">Safety Items</a>
-                <a href="" class="dropdown-item">Workwear</a>
-                <a href="" class="dropdown-item">All PPE</a>
+                <a href="{% url 'products' %}?category=ppe" class="dropdown-item">PPE</a>
+                <a href="{% url 'products' %}?category=safety" class="dropdown-item">Safety Items</a>
+                <a href="{% url 'products' %}?category=workwear" class="dropdown-item">Workwear</a>
+                <a href="{% url 'products' %}?category=ppe,safety,workwear" class="dropdown-item">All PPE</a>
             </div>
         </li>
     </ul>
