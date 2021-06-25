@@ -29,7 +29,6 @@ DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['pjc-plant-services-ms4.herokuapp.com', 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
