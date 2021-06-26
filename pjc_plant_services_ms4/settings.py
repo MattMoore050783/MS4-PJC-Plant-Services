@@ -17,7 +17,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -28,6 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['pjc-plant-services-ms4.herokuapp.com', 'localhost']
+
 
 # Application definition
 
@@ -94,17 +94,15 @@ TEMPLATES = [
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
-AUTHENTICATION_BACKENDS = [
+AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-]
+)
 
 SITE_ID = 1
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -154,6 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -165,12 +164,22 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 if 'USE_AWS' in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
         'CacheControl': 'max-age=94608000',
     }
+
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'ms4-pjc-plant-services'
     AWS_S3_REGION_NAME = 'eu-west-2'
@@ -187,6 +196,7 @@ if 'USE_AWS' in os.environ:
     # Override static and media URLs in production
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
 
 #stripe
 FREE_DELIVERY_THRESHOLD = 100
