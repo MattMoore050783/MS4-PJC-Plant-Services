@@ -327,4 +327,9 @@ a.category-badge > span.badge:hover {
     min-width: 170px;
 }
 
+.img-fluid {
+    max-width: 125px;
+    max-height: 250px;
+}
+
 
