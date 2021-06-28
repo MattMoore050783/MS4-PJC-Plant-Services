@@ -14,6 +14,7 @@
     {% endblock %}
 
     {% block corecss %}
+        <!--Boostrap, CSS, Favicon Link-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
@@ -24,6 +25,7 @@
     {% endblock %}
 
     {% block corejs %}
+        <!--JQuery, Boostrap, FontAwesome links-->
         <script src="https://kit.fontawesome.com/f05cf4be9c.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -38,6 +40,7 @@
     <title>PJC Plant Services {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
+      <!--Company Logo in header-->
     <header class="container-fluid fixed-top">
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
@@ -46,6 +49,7 @@
                     <img src="{% static 'img/logo.png' %}" width="200" Height="100" alt="" class="d-inline-block align-middle mr-2">
                 </a>
             </div>
+       <!--Search Function-->     
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form method="GET" action="{% url 'products' %}">
                     <div class="input-group w-100">
@@ -60,6 +64,7 @@
                     </div>
                 </form>
             </div>
+       <!--My Account link-->     
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
@@ -99,6 +104,7 @@
                 </ul>
             </div>
         </div>
+        <!--Navigation Menu dependant on size of device-->
         <div class="row bg-white">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +115,7 @@
             </nav>
         </div>
     </header>
-
+    <!--Messages -->
     {% if messages %}
         <div class="message-container">
             {% for message in messages %}
@@ -144,7 +150,7 @@
   </body>
 
 </html>
-
+<!--Footer Section-->
 <footer id="footer" class="mt-5">
     <div class="container-xxl py-5">
       <div class="row">
