@@ -316,11 +316,9 @@ python3 manage.py makemigrations
 and migrate the database models to the Postgres database using the following command:
 python3 manage.py migrate
 
-12. Load the fixtures from the 'product_types.json' file and then from the 'products.json' file - which are contained in the 'fixtures' folder into the database. 
-This is done by using the following command:
-```
-python3 manage.py loaddata <file name>
-```
+12. New products can be entered via the Django Admin panel or the SQLLite Database can be imported by using the following command
+python3 manage.py loaddata
+
 13. Create a new superuser with the following command:
 python3 manage.py createsuperuser
 and then enter chosen email, username and password.
