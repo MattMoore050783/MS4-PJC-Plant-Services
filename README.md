@@ -135,8 +135,8 @@ Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wirefram
 
 ## Technologies Used
 
-- Bootstrap
-  - Bootstrap was used for page structures and features like the menu system.
+- Bootstrap4
+  - Bootstrap4 was used for page structures and features like the menu system.
 
 - HTML  
   - HTML was used for the main structure of the website.
@@ -161,6 +161,15 @@ Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wirefram
 
 - Font Awesome
   - Font Awesome was used for the icons on the forms.
+
+- Django Crispy Forms 
+  - Used for forms on the site.
+
+- Django Allauth 
+  - Used for user authentication on the site.
+
+- Stripe 
+  - Used to handle payments on the website.
 
 - VS Code 
   - VS Code was used as the development tool to create all pages. Different add-ons were used in VS Code to aid my developement. These add-ons included were:-
@@ -265,6 +274,145 @@ Github
 2. Click Code and open with Github Desktop.
 3. Follow the prompts in the GitHub Desktop Application.
 
+Heroku Deployment with AWS
+
+1. Install gunicorn, psycopg2-binary and dj-database-url using the PIP Install command.
+2. Freeze all the requirements for the project into a requirements.txt file using the pip3 freeze > requirements.txt command.
+3. Create a procfile, with the following inside it: web: gunicorn pjc_plant_services_ms4.wsgi:application
+4. Push these changes to GitHub, using git add . git commit -m and git push commands.
+5. Navigate to [Heroku](https://www.heroku.com/), and login or create an account.
+6. Once logged in, click on 'resources'.
+7. From the add-ons search bar, add the Heroku Postgres DB, select the free account, and then submit order form to add it to the project.
+8. From the app's dashboard, click on 'settings', and then 'reveal config vars' in order to set the necessary configuration variables for the project. 
+It should look like this: 
+
+| Key                   | Value                      |
+|-----------------------|----------------------------|
+| AWS_ACCESS_KEY_ID     | Your AWS Access Key        |
+| AWS_SECRET_ACCESS_KEY | Your AWS Secret Access Key |
+| DATABASE_URL          | Your Database URL          |
+| EMAIL_HOST_PASS       | Your Email Password        |
+| EMAIL_HOST_USER       | Your Email Address         |
+| SECRET_KEY            | Your Secret Key            |
+| STRIPE_PUBLIC_KEY     | Your Stripe Public Key     |
+| STRIPE_SECRET_KEY     | Your Stripe Secret Key     |
+| STRIPE_WH_SECRET      | Your Stripe WH Key         |
+| USE_AWS               | TRUE                       |
+
+9. Back on the main dashboard, click on 'deploy', and then under the 'Deployment' method section, select GitHub and 'Automatic Deploys'.
+
+10. Ensure that in settings.py, the following code is commented out:
+
+Database
+ https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+and the at the following code is added:
+
+DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+11. Make migrations using the following command:
+python3 manage.py makemigrations
+and migrate the database models to the Postgres database using the following command:
+python3 manage.py migrate
+
+12. Load the fixtures from the 'product_types.json' file and then from the 'products.json' file - which are contained in the 'fixtures' folder into the database. 
+This is done by using the following command:
+```
+python3 manage.py loaddata <file name>
+```
+13. Create a new superuser with the following command:
+python3 manage.py createsuperuser
+and then enter chosen email, username and password.
+
+14. In settings.py, contain the previously entered database setting in an if statement, and add an else condition, so that different databases are 
+used depending on the environment.
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+15. Disable 'COLLECTSTATIC' with the fillowing code: heroku config:set DISABLE_COLLECTSTATIC=1
+so that Heroku doesn't attempt to collect the static files.
+16. Add ALLOWED_HOSTS = ['pjc-plant-services-ms4.herokuapp.com', 'localhost', '127.0.0.1'] to settings.py.
+17. Add Stripe environment variables to settings.py.
+18. Push to Heroku using the following command:
+    git push heroku master
+
+Amazon Web Services:
+
+All Static and media files for the deployed version of the site are hosted in a Amazon Web Services(AWS) S3 bucket. 
+In order to create your own bucket, please follow the instructions on the AWS website 
+[Here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
+
+1. In the gitpod terminal, install boto3 and django-storages using the following commands:
+   pip3 install boto3 and pip3 install django-storages
+2. Freeze the new requirements into the 'requirements.txt' file using the pip3 freeze > requirements.txt command
+3. Add 'storages' to INSTALLED_APPS in settings.py.
+4. Add the following code to settings.py in order to link the AWS bucket to the website:
+
+if 'USE_AWS' in os.environ:
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'downham-and-finch'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
+5. Create a custom_storages.py file in the root level of the project. Inside it, include the locations of the Static Storage and Media Storage.
+6. Delete DISABLE_COLLECTSTATIC from the Heroku Config Variables.
+7. Finally, push to GitHub, and all changes should be automatically pushed to Heroku too.
+
+Making a Local Clone:
+In order to make a local clone of the PJC Plant Services website, enter git clone https://github.com/MattMoore050783/MS4-PJC-Plant-Services into the terminal. 
+
+Next, create an .env.py file in the root directory of the project, and add it to the .gitignore file. 
+The following code needs to be added to the .env.py file:
+
+import os  
+os.environ["DEVELOPMENT"] = "True"    
+os.environ["SECRET_KEY"] = "<Your Secret Key>"
+os.environ["STRIPE_PUBLIC_KEY"] = "<Your Stripe Public Key>"    
+os.environ["STRIPE_SECRET_KEY"] = "<Your Stripe Secret Key>"    
+os.environ["STRIPE_WH_SECRET"] = "<Your Stripe WH Secret Key>"   
+
+Then make sure that the required packages are installed by running the following command: 
+pip install -r requirements.txt
+
+Make migrations and then migrate in order to create a database, by running the following commands:
+python3 manage.py makemigrations and python3 manage.py migrate.
+
+New products can be entered via the Django Admin panel or the SQLLite Database can be imported by using the following command
+python3 manage.py loaddata
+
+Create a superuser with the following command: python3 manage.py runserver and entering your email, username and password.
+
+Run the app by entering the following command:
+python3 manage.py runserver
 
 ---
 
@@ -273,26 +421,27 @@ Github
 ### Code
 
 I used the following links to help my coding:-
-- Code Institue task project for basic setup and and linking to MongoDB
-- https://www.tutorialspoint.com/materialize/index.htm - For Materialize tips
-- https://werkzeug.palletsprojects.com/en/1.0.x/utils/ - for Werkzeug tips
-- https://palletsprojects.com/p/jinja/ - for Jinja coding
+- Code Institue task project for setup and linking to AWS.
 - https://stackoverflow.com/ - for various issues when writing queries in Python.
 - https://www.w3schools.com/python/default.asp - for extra help and tuition with Python.
-- https://www.youtube.com/watch?v=dam0GPOAvVI - for extra help with python and flask to understand it better.
+- https://miniwebtool.com/django-secret-key-generator/ - for generating the secret key
+- https://getbootstrap.com/docs/5.0/getting-started/introduction/ - For help with bootstrap classes
+- http://ami.responsivedesign.is/ - For help with how the site looked on different devices
+- https://dashboard.stripe.com/test/dashboard - For stripe JS Code for my project and webhooks testing
+
 
 ### Content
 
-All content for the site was based on what would be required by Paul John employees if this app was to be live.
+All content for the site was based on what would be required by PJC Plant Services if this app was to be live.
 
 ### Media
 
-All pictures were taken from Paul John on our existing website which I also developed
+All pictures used from other builder merchants websites like Screwfix, etc.
 
 ### Acknowledgements
 
 Many Thanks to the below for the help and guidances throughout my project:- 
 - My Mentor Maranatha
-- Code Institues support team for increasing my hand in date and being supportive while i was working my day to day job through the pandemic.
+- Code Institues support team for increasing my hand in date and being supportive.
 - The slack community for feedback on my website. 
-- Code Institute and the learning programme Python and the task mini project.
+- Code Institute and the learning programme Python and the Boutique-Ado Project
