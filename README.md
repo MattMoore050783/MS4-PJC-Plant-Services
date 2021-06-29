@@ -407,7 +407,7 @@ python3 manage.py makemigrations and python3 manage.py migrate.
 New products can be entered via the Django Admin panel or the SQLLite Database can be imported by using the following command
 python3 manage.py loaddata
 
-Create a superuser with the following command: python3 manage.py runserver and entering your email, username and password.
+Create a superuser with the following command: python3 manage.py createsuperuser and entering your email, username and password.
 
 Run the app by entering the following command:
 python3 manage.py runserver
