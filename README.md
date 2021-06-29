@@ -306,7 +306,7 @@ It should look like this:
 Database
  https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-and the at the following code is added:
+and the following code is added:
 
 DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
