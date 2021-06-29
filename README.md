@@ -1,6 +1,6 @@
 ![responsiveimage](Documentation/ResponsiveImage.png)
 
-PJC Plant Services - E-Commerice Site - MS4
+PJC Plant Services - E-Commerce Site - MS4
 ---
 ## Table of Contents
 
@@ -48,44 +48,64 @@ ___
 #### Goals
 
 The goals of the website were:-
-- 
+- Sell all products on the website that are currently sold from the warehouse.
+- Hold secure information for all current customers and new customers so they can login to place orders.
+- The website theme and colours must tie in with the company logo and profile
+- The website must be accessible and show correctly on all devices from PC/Laptops to Tablets and mobile phones.
+- Products on the website must be easily be able to be modified and added.
+- Payments via the website must be secure.
 
 ---
 
 #### User Stories
 
 From the Designers Perspective:-
-- 
+- The site must be easy to use and navigate and easy to find products.
+- The site must show correct and east to view on all devices.
+- The sites colour scheme must work with the PJC Plant Services logo colour scheme and font
+- The Menus must be clear and concise so users can navigate around the site easily.
+- Products must be able to be easily modified and added to the database
+- Images for each product must be clear on all devices to the user.
+- The shopping Bag must be clear of what products are being brought and how much the total cost is including delivery.
+- Login and Registration to the site must be secure but easy for the user to do.
+- Details about the company location and other social media formats must be shown.
+- Products can be searched easily and also ordered easily by Price, Rasting etc.
+- The checkout page must be secure and easy to understand so the user can complete the purchase easily and quickly.
 
 From the users perspective:-
-- 
-
+- I need to find the product I want to buy easily.
+- My personal details held on the site need to be secure and access needs to be secure.
+- I need to be able to see the product clearly before purchasing.
+- I need to be able to see how much my total order is going to cost including delivery.
+- I need to be able to modify products and add products to the database.
+- I need to be able to place the order easily and securely through the website.
+- I need to be able to register for a new account easily so I can buy products.
+- I need the system to store my details so I dont have to fill this out everytime I place a order.
 
 ---
 
 ### Styling
 
-The website must be easy on the eye but also you must be able to see the different fields, forms and buttons. I used a clear white see through background for forms and cards, used black, red or green for the buttons so they stood out and used black text Colour. The background image was an image that was construction related with a good colour scheme.
+The site must be easy to view on all devices with menus clear and concise, the colours must integrate with the colour scheme of the PJC Plant Services Logo.
 
 The below colour scheme was used for the menus and text.
 
 ![ColourScheme](Documentation/ColourScheme.png)
 
-The font chosed was Comfortaa because it was clear and concise. The backup font if google fonts didnt load is Sans-Serif.
+The font chosed was Montserrat because it was clear and concise. The backup font if google fonts didnt load is Sans-Serif.
 
-The background image used for the site was a background of the sky and machines to keep with the construction theme.
+The background image used for the site was a picture of the head office to shot customers when entering the site they was dealing with a reputable and professional company for all construction supply needs..
 
 ---
 
 ### Wireframes
 
-Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/WireframesandDBDesign.pdf)
+Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wireframes.pdf)
 
 **Design Changes to Wireframes**
-- New Background image used which was clearer on all size screens.
-- Changed the layout of the tasks information to go vertically instead of horizontal.
-- Removed Social Media links from footer - not required just to software being used internally only.
-- isAdmin field added to the user table is database design. This was a Boolean field. This can only be assigned to true by logging into mongodb as the system admin.
+- Colour changes added to menu when hovering with a mouse
+- Menu Structure was changed and shortened for a better user experience.
+- Has sizes taken out on the products, individual products for each size will be added to the site instead.
 
 ---
 
@@ -93,57 +113,45 @@ Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wirefram
 
 ### Existing Features
 
-- The navigation menu shows at the top but shrinks to a burger on smaller devices and shows on the right side of the screen.
-- Users can login and register to the system which will give them standard user access.
-- Admin access must be given by the system administrator with access to MongoDB
-- Different menu options show between admin and standard user. 
-- Admin users have access to all tasks for all users, all completed tasks for all users and management of tasktypes and sites.
-- Standard users have access to there own tasks that have been assigned by a manager and there own completed tasks.
-- Tasks are written in collapsible headers that can be expanded to view more information on the task.
-- When a user logs in, the username and isAdmin is stored in a session variable in a cookie until the user logs out.
+- The navigation menu shows at the top but shrinks to a burger on smaller devices and shows on the left side of the screen with a company logo shrinking to give the user access back to the homepage.
+- Users can login and register to the system which will be stored on the system for delivery information to be automatically stored for future orders.
+- Admin access must be given by the system administrator with access to Django Admin.
+- Different menu options show between admin and standard user, admin users can add and modify products and have access to the product management pages.
+- Standard users have access to only buy products and update there profile information.
+- Purchases at the checkout are made via Stripe for secure purchases via card.
+- Users details of the shopping cart are stored until the browser is closed.
 - The footer is pinned to the bottom of all pages.
-- CRUD can be done by admin users on tasks, tasktypes and sites.
-- Edit and Delete buttons are hidden for standard users, only admin have access to these buttons on manage tasks.
-- Complete button is the only button shown to standard users.
-- Sites and Tasktypes and Users are linked via the database when adding a new task.
-- All fields must be completed when adding a task apart from the completion fields.
-- Fields are checked when adding a task and marked red if not filled out.
-- The due date field is DD/MM/YYYY - A data selector is always used to pick the date to avoid any data mismatches.
-- A search function is only available for admin users on completed tasks so they can search on Product Descriptions and tasktypes for keywords.
+- Webhooks are generated when a purchase is made in case any issues wth the site craching or user error, the order and payments still go through to stripe and to the database via the webhook.
+- The search function searches all products and matches the product name and description of anything added in the search critera.
+- Boostrap classes are used on all pages so it shows on mobile devices as well as large devices, pictures used are clear and concise for each product the give the user the best experience.
 
 
 ### Features Left To Implement
 
-- Pagination needs to be added as the database grows on complete tasks.
-- Admin users can authorise other users in the database to be admin via user management
-- Reports Menu to be added to Admin users so they can run reports on users and in date ranges.
+- Product Quantities to be linked the the purchasing/stock system so stocks can be checked before placing orders.
+- More products to be added to match the total catalogue for the company.
 
 ---
 
 ## Technologies Used
 
-- Materialize
-  - Materialize was used for page structures and features like collapisble tasks and cards.
+- Bootstrap
+  - Bootstrap was used for page structures and features like the menu system.
 
 - HTML  
   - HTML was used for the main structure of the website.
 
-- JQuery
-  - JQuery was used for materialize features that needed some javascript function - Side Menu, Collapsible.
+- JQuery/Javascript
+  - JQuery was used for boostrap features that needed some javascript function - Return to top button.
 
 - CSS
-  - CSS was used to style and change sizes and positions of different items where materialize couldn't be used.
+  - CSS was used to style and change sizes and positions of different items where boostrap couldn't be used.
 
 - Python 
-  - Flask
-    - Flask was used for rendering template, URI's, Redirects, Requests and flash messages.
-  - Bson
-    - BSON was used to access the data in MongoDB and to access ID's
-  - Werkzeug
-    - Werkzeug was user to hash password entry when registering to the site and encrypting on MongoDB.
+  - Python was used for creating the apps, models for each section.
 
-- MongoDB
-  - MongoDB was used to store all data for the website.
+- Django
+  - Django was used for the framework for the website alongside Python.
 
 - Google Chrome
   - Google Chrome Inspect and Developer tools was used for examining the website on different devices.
@@ -177,6 +185,12 @@ Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wirefram
 - Heroku
   - Heroku was used to store and run the application, heroku was linked to github to auto update.
 
+- AWS
+  - Amazon web services was used to store the static files for the site.
+
+- Postrgres SQL
+  - PostgresSQL was used to store the datafor orders, customers etc migrated from the SQL Lite in the development environment.
+
 ---
 
 ## Testing
@@ -185,22 +199,14 @@ Wireframes/Database Tables Link - [Wireframes](Documentation/Wireframes/Wirefram
 
 | Story  |  Test | Extra Coding Required  |
 |---|---|---|
-|The site needs to be easy to use and navigate due to the nature of business it will be used in| Tested all menus on all devices to make sure they were easy to understand and follow|N/A |
-|The site needs to be easy to view on all devices| Tested the site on all devices to make sure it displayed correctly|Changed some size displays of card to show on multiple lines on smaller devices |
-|The background and logo need to be construction and Paul John Group related| Tested the background and logo on all devices|Background size changed to show better on Ipad and IPhone |
-|The system must have a clear difference between what a standard user can access and what a admin user can access|Logged in as different users to make sure different menus are displayed | Created isAdmin on MongoDB and used this in a session variable and jinja to distinguish between isAdmin being true or false|
-|Other Database fields and tables must be easy to access to CRUD via the website for the admin user| Accessed Tasktypes and sites to managed these fields on all devices| N/A|
-|The website and database access needs to be quick| Tested logging in on different devices|N/A |
-|There must be a clear difference to view open tasks and completed tasks| Tested Manage Tasks and Completed Tasks|Extra Jinja and Python added to distinguish IsComplete = True or false, two variables created for user and admin for tasks and completed tasks |
-|I need to be easily access a task and complete it| tested as a user and admin by access a task and completing it| N/A|
-|I need to be find it easy to add tasks to database for different users and sites|Tested the add task page on different devices | Jquery coding added to show required fields in red if not filled in|
-|I need to be able to add different tasktypes and assign them to tasks| added tasktypes from the menu and then added a new task and tested the dropdown menu tomake sure the new tasktype showed| N/A|
-|I need to be able to search completed tasks based on words in the description|Tested various searchs with different words |added jinja code sothe search function showed for only admin users only |
-|I need to be able to register standard users to the system| register different users from the company and made CM's Admins in Mongo DB and left the others as standard users| N/A|
-|I need to site to have admin access and standard user access| Initially had it querying against user 'Admin' but only this one user had admin rights|Added isAdmin - Boolean field so more users could be admin users then changed my python and jinja coding on tasks and completed tasks and the menu on base.html |
-|I need standard user access locked down so data is only relevant to that user| initially checked against user 'admin' on the session cookie| coded to checked against isAdmin =False and the username logged in against the session variable and user on mongoDB|
-|I need admin access to give full access to the website| Checked against isAdmin to show more menu options on the navigation and show all tasks for all users on manage tasks and completed tasks|N/A |
-|As admin I need to be able to search completed tasks| Tested with various searches on the test data on various devices| error in the card showing the search going onto multiple lines, corrected the code.|
+|I need to find the product I want to buy easily|Tested the different menus, search function to find products|All working ok|
+|My personal details held on the site need to be secure and access needs to be secure|Tested the secure login to Django and the site and Heroku once deployed|All secure|
+|I need to be able to see the product clearly before purchasing|Tested viewing the produucts on different devices|Some products showed too small on mobile devices so I made them bigger using a 12 Column instead of 2 6 Columns|
+|I need to be able to see how much my total order is going to cost including delivery|Tested the order in the bag and at checkout and the bag total updating when more products are added|All working ok|
+|I need to be able to modify products and add products to the database|Tested logging in as Admin and using the Product Management, Edit and Delete Functions|All worked ok|
+|I need to be able to place the order easily and securely through the website.|Tested the bag and checkout pages, was an issue with the country field|Changed the country to a dropdown menu to avoid issues with stripe and countires, used django-countries to do this|
+|I need to be able to register for a new account easily so I can buy products.|Tested regsitering an account and getting the email confirmation|The e-mail didnt initially work so i created a new gmail account and used gmail as the base to send emails to customers, once this worked, registration was easy|
+|I need the system to store my details so I dont have to fill this out everytime I place a order.|When users checkout, made sure address details are auto populated if a customer has already registered|Added the option at checkout to save delivery details if they have changed, apart from that all working ok|
 
 ### Responsive Testing
 
@@ -208,26 +214,21 @@ To check how the site ran on different devices I used Am-I-Responsive and Inspec
 
 |  Test | Result  |  Extra Coding Required |
 |---|---|---|
-| Navigation Menu shows burger on small devices| Navigation menu working correctly| N/A|
-| Task information shows on each line in the card on all devices| Tested on all devices| N/A|
-| Background Image to show correctly on all devices|Background didn't show correctly on Ipad on Am-I-Responsive |changed background options in CSS |
-| Manage Tasktypes and Sites boxed should shrink correct to show on mobiles and tablets|All boxes showed correctly | N/A|
-| Buttons should show on the right side when viewing tasks|all buttons showing correctly |N/A |
-| Footer showing correctly on all devices| Footer didn't show correctlyon some pages| Added a top margin to the footer|
+|Tested the home page on Mobile/Tablet and Large Screen devices|Was working ok apart from the shop now button was aligned to the right side on smaller devices|reduced the padding on the button on smaller devices|
+|Tested the menu between large and small devices|When the mobile menu shrunk down, there wasn't any link to get back to the home page|Added the company logo as a link to get back to home on the mobile view|
+|Tested the products menu when searching and adding to bag|product details and buttons wasn't showing correctly on smaller devices|reduced the size of buttons and text on smaller devices|
+|Tested the Search/My Account/Bag on smaller devices|On smaller devices the links was going over to two rows|Made the links smaller on smaller devices so they stayed on one row|
+|Tested the Sort by and catergories links on small devices|Shrunk down and shown correctly by stacking on top|N/A|
+|Tested the footer on all devices|Links were too small originally but everything else worked and staked ok|Made links bigger and changed colour when hovered to give the user a better experience|
+|Tested all menu links on all devices|All links worked but the user didn't know which link he was definitely hovering over|Changed the background colour to greay when the user hovered over menu links to give them a better user experience|
 
 ### Additional Testing
 
 I also carried the following addtional testing:-
 |  Test | Result  |  Extra Coding Required |
-|---|---|---|
-|Adding users,tasktypes and tasks | All showed correctly on the site and in mongoDB| N/A |
-|Changed tasks as a admin user via the edit button| all changes showed correctly on the site and mongodb| N/A|
-|Deleted tasks as a admin user| deleted tasks no longer showing on site and MongoDB| N/A |
-|Tested diferent user logins and registrations and checked the session cookies in google chrome| logins working correct and cookies and users added to MongoDB | N/A|
-|Slack users testing| Button changed from Edit to confirm|Button Text changed |
-|Slack users - Href for company logo not linked| Didn't link to any page|Linked logo to manage tasks page |
-|Logo not showing alt if not displaying | nothing showed|alt added in html |
-| Tested Login of a user who already existed|User didn't added to the database and flash message showed user already exists | N/A |
+|Flake8 - Ran flake8 on all my python code|correct the main error like fields not being used|N/A|
+|Tested move from SQLite to PostGresSQL|Checked the export file before moving accross to the database on Heroku|N/A|
+|Ran tests on AWS when the static files were moved over|Base.css wasn't moved over correctly|Created in the relevant folder and the site showed correctly|
 
 
 ### Code Validation
@@ -235,6 +236,7 @@ I also carried the following addtional testing:-
 - W3C Markup Validation Service for HTML.
 - W3C CSS Validation Service was used for validating the code.
 - http://pep8online.com/ - For Validation Python Code.
+- Slack - Peer Code Review Forum.
 
  ---
 
@@ -242,19 +244,19 @@ I also carried the following addtional testing:-
 
 ### Live Website Link
 
-https://site-task-manager-ms3.herokuapp.com/
+https://pjc-plant-services-ms4.herokuapp.com/
 
 ### Repository Link
 
-https://github.com/MattMoore050783/SiteTaskManager-MS3
+https://github.com/MattMoore050783/MS4-PJC-Plant-Services
 
 ### Running Code Locally
 
 To deploy the project the following is required:-
-- Python3
+
 - Github account
 - Heroku Account
-- MongoDB Account
+- AWS Account
 
 To create a clone follow the below steps:- 
 
@@ -263,54 +265,6 @@ Github
 2. Click Code and open with Github Desktop.
 3. Follow the prompts in the GitHub Desktop Application.
 
-To work with the clone please follow the below steps:-
-1. Install requirements.txt with the following code in the terminal window
-  > pip3 install -r requirements.txt.
-2. Create the Cluster in MongoDB.
-3. Create the database in MongoDB
-4. Add the following collections to the database
-  - sites
-  - tasks
-  - users
-  - tasktypes
-5. Create Enviroment Variables
-  - Create a .gitignore file in the root directory of the project.
-  - Create a file in the root directory called "env.py". This contains all of your envornment variables. Your env.py file should look like the following:
-> Import os
->
-> os.environ.setdefault("IP", "<IP TO USE>")
->
-> os.environ.setdefault("PORT", "<PORT TO USE>")
->
-> os.environ.setdefault("SECRET_KEY", "<ADD YOUR SECRET KEY>")
->
-> os.environ.setdefault("MONGO_URI", "<ADD YOUR MONGO URI>")
->
-> os.environ.setdefault("MONGO_DBNAME", "<ADD YOUR DATABASE NAME>")
-
-6. Add env.py to the gitignore file
-
-7. Create the procfile which is required when using Heroku.
-
-To run the application from terminal use the python3 app.py command.
-
-Heroku Configuration
-
-1. Open [Heroku](http://heroku.com/).
-2. Login or signup for Heroku.
-3. Once logged in create a new app and select the region. 
-4. Deployment method "GitHub" 
-5. Select "connect to GitHub" and follow the on screen instructions. Once connected to your Github:
-    1. Search for your repository using the form provided.
-6. Once you have connected your GitHub repository:
-    1. Navigate to the "Settings" tab:
-        1. Scroll to the section "Config Vars" this is where you will tell Heroku what the variables are:
-            1. Input data from env.py in the key value section: (e.g. SECRET_KEY in the first box, <YOUR SECRET_KEY> in the second box)
-            2. Input all data for IP, PORT, SECRET_KEY, MONGO_DBNAME & MONGO_URI
-    2. Navigate back to the "Deploy" tab:
-        1. Scroll to the "Manual Deploy" tab:
-            1. Select the branch you wish to deploy.
-            2. Click the "Deploy Branch" button. 
 
 ---
 
